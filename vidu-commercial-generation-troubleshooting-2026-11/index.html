@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Vidu AI Practical Handbook: Commercial Generation Troubleshooting and Image-Quality Tuning</title>
+<style>
+body{font-family:Georgia,serif;max-width:820px;margin:2rem auto;padding:0 1.2rem;line-height:1.65;color:#1a1a1a;background:#fff}
+h1{font-size:1.85rem;line-height:1.25} h2{margin-top:2rem} h3{margin-top:1.4rem}
+figure{margin:1.5rem 0} img{max-width:100%;height:auto;display:block;border-radius:4px}
+figcaption{font-size:.85rem;color:#555;margin-top:.4rem}
+.caption{color:#555;font-size:.95rem} table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:.92rem}
+th,td{border:1px solid #ccc;padding:.45rem .6rem;vertical-align:top} th{background:#f4f4f4}
+a{color:#0b57d0} hr{border:none;border-top:1px solid #ddd;margin:2rem 0}
+pre{background:#f6f8fa;padding:1rem;overflow:auto;border-radius:6px}
+</style>
+</head>
+<body>
+<article>
+<h1>Vidu AI Practical Handbook: Commercial Generation Troubleshooting and Image-Quality Tuning</h1>
+<figure><img src="images/viduai-10-cover.png" alt="Vidu AI — Inspect, adjust and review" loading="lazy"/><figcaption>Vidu AI — Inspect, adjust and review</figcaption></figure>
+<p>In real production environments of film post, advertising visuals and short-drama mass production, video generation is never one-click magic — it is a serious engineering process full of tuning and anomaly triage. Even <a href="https://viduai.co" rel="noopener noreferrer">Vidu AI</a>, widely recognised as strong on high dynamics and character consistency, can occasionally show edge flicker, micro text creep, water mesh-tearing and shadow noise under extreme backlight, ultra-wide camera moves or multi-fluid interaction if parameters are wrong or storyboard logic conflicts. As a benchmark tool among the best AI video models of 2026, only by fully mastering its troubleshooting logic can teams keep impeccable stable delivery on long productions and truly make it the most battle-ready model toward 2027.</p>
+<figure><img src="images/viduai-10-body1.png" alt="Vidu AI — Locate the quality issue" loading="lazy"/><figcaption>Vidu AI — Locate the quality issue</figcaption></figure>
+<p class="caption"><em>Concept illustration: Locate the quality issue. Detail / Motion / Check.</em></p>
+<p>This handbook aggregates troubleshooting experience summarised by front-line tuning engineers across hundreds of hours of high-intensity field work, providing directly actionable tuning/triage lookup tables and solutions.</p>
+<hr/>
+<h2>1. Quick triage guide for core production anomalies</h2>
+<p>For the four highest-frequency image-quality issues in daily production, cause analysis and quick solutions:</p>
+<figure><img src="images/viduai-10-body2.png" alt="Vidu AI — Separate structural and temporal faults" loading="lazy"/><figcaption>Vidu AI — Separate structural and temporal faults</figcaption></figure>
+<p class="caption"><em>Concept illustration: Separate structural and temporal faults. Detail / Motion / Check.</em></p>
+<table>
+<tr><th>Anomaly</th><th>Underlying cause triage</th><th>Front-line engineering fix</th></tr>
+<tr><td><strong>High-frequency temporal flicker</strong></td><td>Sampling iteration steps too low, or lighting-environment descriptions conflict</td><td>Raise sampling steps into a balanced range; strictly lock a single key-light colour temperature and cast direction in the prompt</td></tr>
+<tr><td><strong>Fluid / edge tearing (Mesh Tearing)</strong></td><td>Particle flow too fast, beyond spatiotemporal Patch receptive field</td><td>Add liquid physical viscosity and surface-tension definitions in the prompt; moderately lower motion amplitude</td></tr>
+<tr><td><strong>Rigid-object soft deformation (Plastic Distortion)</strong></td><td>Camera rotation angle too large; lacking structural-rigidity prior guidance</td><td>Use orthographic/side geometric perspective in the first frame; strengthen “keep absolute geometric rigidity (Rigid Body)” in the prompt</td></tr>
+<tr><td><strong>Shadow banding and noise (Dark Area Noise)</strong></td><td>Latent denoising trajectory drift; limited dynamic range</td><td>Generate in Log greyscale then grade; avoid stacking extreme “pure black background” semantics in the prompt</td></tr>
+</table>
+<hr/>
+<h2>2. Deep tuning philosophy: balancing core control dimensions</h2>
+<figure><img src="images/viduai-10-body3.png" alt="Vidu AI — Hold the other conditions fixed" loading="lazy"/><figcaption>Vidu AI — Hold the other conditions fixed</figcaption></figure>
+<p class="caption"><em>Concept illustration: Hold the other conditions fixed. Detail / Motion / Check.</em></p>
+<p>In industrial video debugging, many beginners blindly maximise a single parameter. In fact, balance and complementarity are the base guarantee of high yield:</p>
+<h3>Dimension 1: Prompt relevance weight vs frame stability</h3>
+<ul><li><strong>Tuning law:</strong> when weight is too high, the model forcibly matches every prompt detail — colour saturation blows out, edges harden and look burnt; when too low, video easily drifts from storyboard intent;</li><li><strong>Balance range:</strong> in day-to-day commercial setups on <a href="https://viduai.co" rel="noopener noreferrer">viduai.co</a>, keep moderate relevance guidance and leave spare compute for spatiotemporal continuity smooth denoising to get the most native cinematic material feel.</li></ul>
+<h3>Dimension 2: Motion amplitude vs structural geometric fidelity</h3>
+<figure><img src="images/viduai-10-body4.png" alt="Vidu AI — Review the same observation again" loading="lazy"/><figcaption>Vidu AI — Review the same observation again</figcaption></figure>
+<p class="caption"><em>Concept illustration: Review the same observation again. Detail / Motion / Check.</em></p>
+<ul><li><strong>Steady dolly and product ads:</strong> set motion amplitude in a lower gentle range so letter edges on commercial packaging stay ruler-straight and trademark patterns absolutely still;</li><li><strong>Natural scenery and empty-shot epics:</strong> raise motion amplitude to a medium-active range to fully release natural randomness of atmospheric volume fog, leaf sway and water glitter;</li><li><strong>Fight stunts and extreme sports:</strong> keep motion amplitude mid-high — release skeletal impact energy while avoiding exceeding U-ViT’s spatiotemporal receptive field.</li></ul>
+<hr/>
+<h2>3. Standard QA acceptance checklist for delivered shots</h2>
+<p>Before marking a shot pass and handing to editorial, QA must verify frame by frame against this five-step list:</p>
+<figure><img src="images/viduai-10-body5.png" alt="Vidu AI — Record the accepted output" loading="lazy"/><figcaption>Vidu AI — Record the accepted output</figcaption></figure>
+<p class="caption"><em>Concept illustration: Record the accepted output. Detail / Motion / Check.</em></p>
+<ol><li><strong>Horizon and vanishing-point tilt:</strong> through the whole move, does background horizon displace steadily with no aimless wave undulation;</li><li><strong>Light-projection topology consistency:</strong> do shadow length and direction always match key-light position; any fake shadows as the character walks;</li><li><strong>Contact-surface physical judgement:</strong> do footfalls / cup-plate collisions penetrate, sink or float; does water hitting a surface splash reasonably;</li><li><strong>Edge contour without ghosting:</strong> at high-contrast contours (night hair, building corners) no jitter mosaic under frame-by-frame play;</li><li><strong>Intact colour dynamic range:</strong> highlights not clipped; shadows retain recoverable detail layers.</li></ol>
+<p>Following the above standardised flow, teams thoroughly converge occasional uncertainty into standardised industrial capacity and achieve high-quality delivery of <a href="https://viduai.co" rel="noopener noreferrer">Vidu AI</a> across full commercial scenarios.</p>
+</article>
+</body>
+</html>
